@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumio | Interactive AI Meeting Assistant</title>
+    <meta name="description" content="Lumio, the AI meeting assistant: an interactive JavaScript website with a theme toggle, live clock, quote generator and a validated registration form.">
+    <meta name="author" content="NovaByte Solutions">
+    <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Poppins:wght@300;400;500;600;700;800&amp;display=swap">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- All interactivity lives in this external script (defer = runs after the HTML is ready) -->
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- Scroll progress bar (width set by JavaScript) -->
+    <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+    <!-- ===================== HEADER + RESPONSIVE NAVIGATION ===================== -->
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="#home" class="brand" id="brand">
+                <img src="assets/icons/logo.svg" alt="Lumio logo" width="38" height="38">
+                <span>Lumio</span>
+            </a>
+
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#live" class="nav-link">Live</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#register" class="nav-link">Register</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Mini clock in the header (updated every second) -->
+                <span class="header-clock" id="headerClock" aria-label="Current time">--:--</span>
+
+                <!-- Dark / light theme toggle -->
+                <button type="button" class="icon-btn" id="themeToggle" aria-label="Switch to light theme" title="Switch theme (shortcut: T)">
+                    <img src="assets/icons/sun.svg" alt="" width="22" height="22" id="themeIcon">
+                </button>
+
+                <!-- Hamburger for small screens -->
+                <button type="button" class="icon-btn menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+                    <img src="assets/icons/menu.svg" alt="" width="22" height="22" id="menuIcon">
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ===================== HERO: 3D golden tunnel ===================== -->
+        <section class="hero" id="home" aria-labelledby="hero-title">
+            <div class="hero-sticky">
+                <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+
+                <div class="scene">
+                    <div class="world" id="world">
+                        <div class="ring" data-z="-300" data-spin="1" aria-hidden="true"></div>
+                        <div class="ring ring-thin" data-z="-700" data-spin="-1" aria-hidden="true"></div>
+                        <div class="ring" data-z="-1100" data-spin="1" aria-hidden="true"></div>
+                        <div class="ring ring-thin" data-z="-1500" data-spin="-1" aria-hidden="true"></div>
+                        <div class="ring" data-z="-1900" data-spin="1" aria-hidden="true"></div>
+                        <div class="ring ring-thin" data-z="-2300" data-spin="-1" aria-hidden="true"></div>
+                        <div class="ring" data-z="-2700" data-spin="1" aria-hidden="true"></div>
+
+                        <div class="fcard" data-x="-44" data-y="-26" data-z="-650" aria-hidden="true">
+                            <img src="assets/icons/summary.svg" alt="" width="22" height="22">
+                            <span><strong>Summary ready</strong><small>in 12 seconds</small></span>
+                        </div>
+                        <div class="fcard fcard-dark" data-x="44" data-y="24" data-z="-1000" aria-hidden="true">
+                            <img src="assets/icons/tasks.svg" alt="" width="22" height="22">
+                            <span><strong>Task assigned</strong><small>Update API &rarr; Rahul</small></span>
+                        </div>
+                        <div class="fcard hide-sm" data-x="-46" data-y="26" data-z="-1450" aria-hidden="true">
+                            <img src="assets/icons/mic.svg" alt="" width="22" height="22">
+                            <span><strong>Recording</strong><small>Weekly product sync</small></span>
+                        </div>
+                        <div class="fcard fcard-dark hide-sm" data-x="44" data-y="-26" data-z="-1850" aria-hidden="true">
+                            <img src="assets/icons/search.svg" alt="" width="22" height="22">
+                            <span><strong>Found it</strong><small>"pricing" &middot; 14:32</small></span>
+                        </div>
+
+                        <div class="orb-wrap" data-z="-3000" aria-hidden="true">
+                            <div class="orb"><div class="eq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+                        </div>
+                        <p class="end-line" data-z="-2950" aria-hidden="true">Every word, <em>captured.</em></p>
+
+                        <div class="hero-head" data-z="0">
+                            <h1 id="hero-title">
+                                <span class="line-1"><span class="w" style="--i:0">Meetings</span> <span class="w" style="--i:1">that</span></span>
+                                <span class="line-2"><span class="w" style="--i:2">write</span> <span class="w" style="--i:3">themselves.</span></span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-ui" id="heroUI">
+                    <!-- Dynamic greeting, filled in by JavaScript based on the time of day -->
+                    <p class="hero-greeting" id="heroGreeting">Welcome to Lumio</p>
+
+                    <div class="hero-bottom">
+                        <div class="hero-copy">
+                            <p class="hero-lead">Lumio joins your calls, writes the summary and turns every decision into a task for your
+                                <span class="typing" id="typing">product team.</span></p>
+                            <div class="btn-row">
+                                <a href="#register" class="btn btn-gold btn-lg">Create free account</a>
+                                <a href="#live" class="btn btn-outline btn-lg">Try the live widgets</a>
+                            </div>
+                        </div>
+                        <div class="scroll-meter" aria-hidden="true">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><circle cx="30" cy="30" r="26" class="track"/><circle cx="30" cy="30" r="26" class="fill" id="meterFill"/></svg>
+                            <span>Scroll<br>to dive in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logo strip -->
+        <div class="logo-strip" aria-label="Companies using Lumio">
+            <ul class="logo-track" id="logoTrack">
+                <!-- Filled by JavaScript from an array of company names -->
+            </ul>
+        </div>
+
+        <!-- ===================== LIVE WIDGETS ===================== -->
+        <section class="section" id="live" aria-labelledby="live-title">
+            <div class="container">
+                <div class="section-head">
+                    <span class="kicker">Live widgets</span>
+                    <h2 id="live-title">Your day, <em>at a glance</em></h2>
+                    <p class="muted">These cards update by themselves. Try the keyboard shortcuts: <kbd>Q</kbd> for a new quote and <kbd>T</kbd> to switch the theme.</p>
+                </div>
+
+                <div class="widget-grid">
+                    <!-- Digital clock and greeting -->
+                    <article class="widget clock-widget">
+                        <div class="widget-top">
+                            <img src="assets/icons/clock.svg" alt="" width="24" height="24">
+                            <span class="widget-label">Digital clock</span>
+                            <button type="button" class="chip-btn" id="formatToggle" aria-pressed="false">24-hour</button>
+                        </div>
+                        <p class="greeting" id="greeting">Hello!</p>
+                        <p class="clock" id="clock" aria-live="off">--:--:--</p>
+                        <p class="muted date" id="dateLine">Loading date...</p>
+                        <div class="day-bar" aria-hidden="true"><span id="dayProgress"></span></div>
+                        <p class="muted small" id="dayText">Day progress</p>
+                    </article>
+
+                    <!-- Random quote generator -->
+                    <article class="widget quote-widget">
+                        <div class="widget-top">
+                            <img src="assets/icons/quote.svg" alt="" width="24" height="24">
+                            <span class="widget-label">Quote of the moment</span>
+                            <span class="fav-count" id="favCount" title="Quotes you liked">0 liked</span>
+                        </div>
+                        <blockquote class="quote" id="quoteBox" title="Double-click to like this quote">
+                            <p id="quoteText">Great things are done by a series of small things brought together.</p>
+                            <footer id="quoteAuthor">Vincent van Gogh</footer>
+                        </blockquote>
+                        <div class="btn-row">
+                            <button type="button" class="btn btn-gold" id="newQuote">New quote</button>
+                            <button type="button" class="btn btn-outline like-btn" id="likeQuote" aria-pressed="false">
+                                <img src="assets/icons/heart.svg" alt="" width="18" height="18"> Like
+                            </button>
+                        </div>
+                        <p class="muted small hint">Tip: double-click the quote to like it.</p>
+                    </article>
+
+                    <!-- Stats with counters -->
+                    <article class="widget stats-widget">
+                        <div class="widget-top">
+                            <img src="assets/icons/check.svg" alt="" width="24" height="24">
+                            <span class="widget-label">Lumio today</span>
+                        </div>
+                        <ul class="stat-list" id="statList">
+                            <!-- Filled by JavaScript from an array of objects -->
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SERVICES (rendered from an array) ===================== -->
+        <section class="section section-alt" id="services" aria-labelledby="services-title">
+            <div class="container">
+                <div class="section-head">
+                    <span class="kicker">Services</span>
+                    <h2 id="services-title">One assistant, <em>four superpowers</em></h2>
+                    <p class="muted">Hover over a card to see more. Double-click a card to pin it.</p>
+                </div>
+                <p class="hover-status" id="hoverStatus" aria-live="polite">Hover over a service to learn more.</p>
+                <div class="card-grid" id="serviceGrid">
+                    <!-- Service cards are created by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== PRICING (rendered from objects) ===================== -->
+        <section class="section" id="pricing" aria-labelledby="pricing-title">
+            <div class="container">
+                <div class="section-head center">
+                    <span class="kicker">Pricing</span>
+                    <h2 id="pricing-title">Fair pricing, <em>in rupees</em></h2>
+                    <p class="muted">Start free. Prices exclude 18% GST.</p>
+                </div>
+                <div class="billing" role="group" aria-label="Billing period">
+                    <button type="button" class="billing-btn is-active" data-billing="monthly">Monthly</button>
+                    <button type="button" class="billing-btn" data-billing="yearly">Yearly <span class="save">-17%</span></button>
+                </div>
+                <div class="price-grid" id="priceGrid">
+                    <!-- Pricing cards are created by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== FAQ (show / hide with JavaScript) ===================== -->
+        <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+            <div class="container narrow">
+                <div class="section-head center">
+                    <span class="kicker">FAQ</span>
+                    <h2 id="faq-title">Good <em>questions</em></h2>
+                </div>
+                <div class="faq-list" id="faqList">
+                    <!-- Questions are created by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== REGISTRATION FORM ===================== -->
+        <section class="section" id="register" aria-labelledby="register-title">
+            <div class="container register-grid">
+                <div class="register-intro">
+                    <span class="kicker">Register</span>
+                    <h2 id="register-title">Create your <em>free account</em></h2>
+                    <p class="muted">Every field is checked as you type, and nothing reloads the page.</p>
+                    <ul class="rule-list" id="ruleList">
+                        <li data-rule="name">Full name with at least 3 letters</li>
+                        <li data-rule="email">A valid email address</li>
+                        <li data-rule="phone">A 10-digit mobile number starting with 6, 7, 8 or 9</li>
+                        <li data-rule="length">Password with 8 or more characters</li>
+                        <li data-rule="match">Both passwords match</li>
+                    </ul>
+                    <img src="assets/images/mobile-app.svg" alt="Lumio mobile app showing a meeting summary and upcoming meetings" class="register-art" width="520" height="620">
+                </div>
+
+                <div class="form-card">
+                    <form id="registerForm" novalidate>
+                        <div class="field">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="e.g. Divya Sharma" autocomplete="name">
+                            <p class="error" id="fullNameError"></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
+                            <p class="error" id="emailError"></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="phone">Phone Number</label>
+                            <div class="phone-wrap">
+                                <span class="prefix">+91</span>
+                                <input type="tel" id="phone" name="phone" placeholder="9876543210" maxlength="10" inputmode="numeric" autocomplete="tel-national">
+                            </div>
+                            <p class="error" id="phoneError"></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="password">Password</label>
+                            <div class="password-wrap">
+                                <input type="password" id="password" name="password" placeholder="At least 8 characters" autocomplete="new-password">
+                                <button type="button" class="eye-btn" data-target="password" aria-label="Show password">
+                                    <img src="assets/icons/eye.svg" alt="" width="20" height="20">
+                                </button>
+                            </div>
+                            <div class="strength" aria-hidden="true"><span id="strengthBar"></span></div>
+                            <p class="small muted" id="strengthText">Password strength</p>
+                            <p class="error" id="passwordError"></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <div class="password-wrap">
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Type it again" autocomplete="new-password">
+                                <button type="button" class="eye-btn" data-target="confirmPassword" aria-label="Show password">
+                                    <img src="assets/icons/eye.svg" alt="" width="20" height="20">
+                                </button>
+                            </div>
+                            <p class="error" id="confirmPasswordError"></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="about">About your team <span class="muted">(optional)</span></label>
+                            <textarea id="about" name="about" rows="4" maxlength="200" placeholder="How many people, what kind of meetings..."></textarea>
+                            <div class="counter-row">
+                                <div class="counter-bar" aria-hidden="true"><span id="counterBar"></span></div>
+                                <span class="counter" id="charCounter">0 / 200</span>
+                            </div>
+                        </div>
+
+                        <div class="btn-row">
+                            <button type="submit" class="btn btn-gold btn-lg" id="submitBtn">Create account</button>
+                            <button type="reset" class="btn btn-outline btn-lg">Clear</button>
+                        </div>
+                    </form>
+
+                    <!-- Hidden until the form is submitted successfully -->
+                    <div class="success" id="successBox" hidden>
+                        <img src="assets/icons/check.svg" alt="" width="56" height="56">
+                        <h3 id="successTitle">Welcome!</h3>
+                        <p class="muted" id="successText">Your account is ready.</p>
+                        <button type="button" class="btn btn-outline" id="registerAgain">Register another person</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a href="#home" class="brand">
+                <img src="assets/icons/logo.svg" alt="" width="32" height="32">
+                <span>Lumio</span>
+            </a>
+            <p class="muted small">&copy; <span id="year">2026</span> NovaByte Solutions, Bengaluru. Built with HTML, CSS and JavaScript (ES6).</p>
+            <a href="#home" class="back-link">Back to top &uarr;</a>
+        </div>
+    </footer>
+
+    <!-- Toast message (shown by JavaScript) -->
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+</body>
+</html>

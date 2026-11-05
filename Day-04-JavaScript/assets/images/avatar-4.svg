@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-labelledby="t"><title id="t">Illustrated avatar</title>
+<rect width="200" height="200" rx="100" fill="#c9d3db"/>
+<circle cx="100" cy="82" r="38" fill="#f6dcc6"/>
+<path d="M62 78 Q66 36 100 38 Q136 38 138 78 Q124 58 100 58 Q78 58 62 78Z" fill="#5b3a1a"/>
+<path d="M40 182 Q46 128 100 128 Q154 128 160 182 Q130 200 100 200 Q70 200 40 182Z" fill="#ffffff" opacity=".92"/>
+</svg>
